@@ -110,7 +110,7 @@ const Booking: React.FC = () => {
         }
       );
 
-      // Navigate to confirmation page with booking details
+      
       navigate('/booking-confirmation', {
         state: {
           booking: response.data,
@@ -172,17 +172,17 @@ const Booking: React.FC = () => {
         </div>
       </div>
 
-      {/* Seat Selection */}
+      
       <div className="bg-gray-800 rounded-lg p-6">
         <h2 className="text-2xl font-bold text-white mb-6">Select Your Seats</h2>
         
-        {/* Screen */}
+        
         <div className="mb-8">
           <div className="w-full h-3 bg-gray-600 rounded-t-lg"></div>
           <div className="text-center text-gray-400 text-sm mt-2">Screen</div>
         </div>
 
-        {/* Seat Grid */}
+        
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full">
             {Array.from({ length: rows }).map((_, rowIndex) => (
@@ -212,7 +212,7 @@ const Booking: React.FC = () => {
           </div>
         </div>
 
-        {/* Seat Legend */}
+        
         <div className="flex justify-center space-x-6 mt-6 pt-6 border-t border-gray-700">
           <div className="flex items-center">
             <div className="w-6 h-6 bg-gray-700 rounded mr-2"></div>
@@ -229,7 +229,7 @@ const Booking: React.FC = () => {
         </div>
       </div>
 
-      {/* Booking Summary */}
+      
       <div className="bg-gray-800 rounded-lg p-6">
         <h3 className="text-xl font-bold text-white mb-4">Booking Summary</h3>
         <div className="space-y-3 text-gray-300">
@@ -275,7 +275,7 @@ const Booking: React.FC = () => {
         </button>
       </div>
 
-      {/* Backend endpoint needed for shows */}
+      
     </div>
   );
 };
