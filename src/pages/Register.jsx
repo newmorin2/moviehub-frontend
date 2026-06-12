@@ -1,19 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 
-function Login(){
-    [passwordVisibility, setPasswordVisibility] = useState("")
-
-    const togglePasswordVisibility = () =>{
-        setPasswordVisibility((p) => !p);
-    };
-
+function Register(){
     return(
         <>
         <div>
             <div>
                 <form onSubmit={}>
                     <h2>
-                        Login to your account
+                        Register your account
                     </h2>
                     <label htmlFor="username">Enter your Username:</label>
                     <input 
@@ -29,8 +23,15 @@ function Login(){
                     >
                         {showPassword ? 'Hide' : 'Show'}
                     </button>
+                    <label htmlFor="email">Enter your email:</label>
+                    <input 
+                    type="email" 
+                    placeholder="TYpe your email..." />
                     <button type="submit">Login</button>
                 </form>
+                <button onClick={}>
+                    Sign in with Google
+                </button>
             </div>
             <div>
                 <div>
@@ -40,16 +41,16 @@ function Login(){
                 <h1>
                     MovieHub
                 </h1>
-                <p>Please Login to continue.</p>
-                <p>Are you new here?</p>
+                <p>Please register to continue.</p>
+                <p>Already a member?</p>
                 <div>
-                    
+
                 </div>
                 </div>
             </div>
-        </div>
+        </div>        
         </>
     )
 }
 
-export default Login;
+export default Register;
