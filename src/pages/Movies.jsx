@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMovies } from "../utils/helper";
+import { getMovies } from "../utils/helpers";
 
 function Movies() {
   const [movies, setMovies] = useState([]);

@@ -6,26 +6,58 @@ export default function AddMovie() {
     title: "",
     genre: "",
     description: "",
-    duration: "",
-    price: ""
+    release_year: "",
+    rating: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post(
-      "http://localhost:8000/movies",
-      formData
-    );
+    try {
+      setLoading(true);
 
-    alert("Movie added");
+      const response = await axios.post(
+        "http://localhost:8000/movies",
+        {
+          ...formData,
+          release_year: Number(formData.release_year),
+          rating: Number(formData.rating),
+        }
+      );
+
+      console.log(response.data);
+      alert("Movie added successfully!");
+
+      setFormData({
+        title: "",
+        genre: "",
+        description: "",
+        release_year: "",
+        rating: "",
+      });
+    } catch (error) {
+      console.error(error);
+
+      if (error.response) {
+        console.log(error.response.data);
+        alert(
+          JSON.stringify(error.response.data, null, 2)
+        );
+      } else {
+        alert("Failed to connect to server");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -34,53 +66,67 @@ export default function AddMovie() {
         Add Movie
       </h1>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-4"
-      >
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
+          type="text"
           name="title"
-          placeholder="Movie title"
+          placeholder="Movie Title"
+          value={formData.title}
           onChange={handleChange}
-          className="w-full border p-2"
+          className="w-full border p-2 rounded"
+          required
         />
 
         <input
+          type="text"
           name="genre"
           placeholder="Genre"
+          value={formData.genre}
           onChange={handleChange}
-          className="w-full border p-2"
+          className="w-full border p-2 rounded"
+          required
         />
 
         <textarea
           name="description"
           placeholder="Description"
+          value={formData.description}
           onChange={handleChange}
-          className="w-full border p-2"
+          className="w-full border p-2 rounded"
+          required
         />
 
         <input
-          name="duration"
-          placeholder="Duration"
+          type="number"
+          name="release_year"
+          placeholder="Release Year"
+          value={formData.release_year}
           onChange={handleChange}
-          className="w-full border p-2"
+          className="w-full border p-2 rounded"
+          required
         />
 
         <input
-          name="price"
-          placeholder="Price"
+          type="number"
+          step="0.1"
+          min="0"
+          max="10"
+          name="rating"
+          placeholder="Rating (0-10)"
+          value={formData.rating}
           onChange={handleChange}
-          className="w-full border p-2"
+          className="w-full border p-2 rounded"
+          required
         />
 
         <button
+          type="submit"
+          disabled={loading}
           className="bg-red-600 text-white px-4 py-2 rounded"
         >
-          Save Movie
+          {loading ? "Saving..." : "Save Movie"}
         </button>
       </form>
     </div>
   );
 }
-
-export default AddMovie;
