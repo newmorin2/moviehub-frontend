@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import AddMovie from "./AddMovie";
 import axios from "axios";
 
 const API_URL = "http://localhost:8000/movies";
@@ -76,7 +77,7 @@ export default function AdminDashboard() {
 
           <Link
             to="/admin/add"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-medium"
+            className="bg-red-600  text-white px-5 py-3 rounded-lg font-medium"
           >
             + Add Movie
           </Link>
@@ -101,7 +102,7 @@ export default function AdminDashboard() {
 
             <Link
               to="/admin/add"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+              className="bg-red-600 text-white px-4 py-2 rounded-lg"
             >
               Add Movie
             </Link>
@@ -174,5 +175,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-
-export default AdminDashboard;
