@@ -54,7 +54,7 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-screen bg-linear-to-b from-red-600  to-gray-950">
         <h2 className="text-xl font-semibold">Loading movies...</h2>
       </div>
     );

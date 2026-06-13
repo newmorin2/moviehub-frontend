@@ -1,6 +1,22 @@
-import { Routes, Route } from "react-router-dom";
+import React from "react"
+import AppRoutes from "./routes/AppRoutes"
+import Navbar from "./components/standard/Navbar"
+import { AuthProvider,useAuth } from "./context/AuthContext"
 
-import Navbar from "./components/standard/Navbar";
+function AppContent(){
+  const { user } = useAuth
+
+  return(
+    <div>
+      {user && <Navbar />}
+      <main>
+        <AppRoutes />
+      </main>
+    </div>
+  )
+
+}
+
 
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
@@ -10,14 +26,11 @@ import AddMovie from "./pages/AddMovie";
 function App() {
   return (
     <>
-      <Navbar />
-
-<Routes>
-  <Route path="/" element={<Home />} />
- 
-  <Route path="/admin" element={<AdminDashboard />} />
-  <Route path="/admin/add" element={<AddMovie />} />
-</Routes>
+      <AuthProvider>
+          <div>
+            <AppContent />
+          </div>
+      </AuthProvider>
     </>
   );
 }
