@@ -12,7 +12,7 @@ export default function Movies() {
   );
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="min-h-screen bg-linear-to-b from-red-600  to-gray-950">
       <h1 className="text-3xl font-bold mb-4">Movies</h1>
 
       <SearchBar search={search} setSearch={setSearch} />

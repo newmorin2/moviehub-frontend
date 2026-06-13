@@ -1,8 +1,16 @@
 import { useParams } from "react-router-dom";
 import { movies } from "../data/movies";
 
-export default function MovieDetails() {
+function MovieDetails(){
   const { id } = useParams();
+    return(
+        <>
+         <div className="min-h-screen bg-linear-to-b from-red-600  to-gray-950">
+
+         </div>
+        </>
+    )
+}
 
   const movie = movies.find((m) => m.id === parseInt(id));
 
