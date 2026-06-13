@@ -1,11 +1,23 @@
-import React from "react";
+import { useState } from "react";
+import { movies } from "../data/movies";
 
-function Movies(){
-    return(
-        <>
-        
-        </>
-    )
+import SearchBar from "../components/movies/SearchBar";
+import MovieList from "../components/movies/MovieList";
+
+export default function Movies() {
+  const [search, setSearch] = useState("");
+
+  const filtered = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="p-6 max-w-6xl mx-auto">
+      <h1 className="text-3xl font-bold mb-4">Movies</h1>
+
+      <SearchBar search={search} setSearch={setSearch} />
+
+      <MovieList movies={filtered} />
+    </div>
+  );
 }
-
-export default Movies;

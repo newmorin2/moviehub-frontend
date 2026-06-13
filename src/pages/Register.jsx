@@ -5,7 +5,7 @@ function Register(){
         <>
         <div>
             <div>
-                <form onSubmit={}>
+                <form>
                     <h2>
                         Register your account
                     </h2>
@@ -29,7 +29,7 @@ function Register(){
                     placeholder="TYpe your email..." />
                     <button type="submit">Login</button>
                 </form>
-                <button onClick={}>
+                <button >
                     Sign in with Google
                 </button>
             </div>
