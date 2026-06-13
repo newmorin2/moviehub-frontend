@@ -1,11 +1,17 @@
+
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export default function ProtectedRoute({ children }) {
+export default function AdminRoute({ children }) {
   const { user } = useAuth();
 
   if (!user) {
     return <Navigate to="/login" replace />;
+  }
+  const isAdmin = user.email === "admin@gmail.com"; 
+
+  if (!isAdmin) {
+    return <Navigate to="/" replace />;
   }
 
   return children;

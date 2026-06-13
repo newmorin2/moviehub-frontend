@@ -11,32 +11,23 @@ import AddMovie from "../pages/AddMovie";
 import AdminDashboard from "../pages/AdminDashboard";
 import Home from "../pages/Home";
 import ProtectedRoutes from "./ProtectedRoutes";
+import AdminRoute from "./AdminRoutes";
 import Navbar from "../components/standard/Navbar";
 
 
 const AppRoutes = () => {
     return(
         <>
-            {location.pathname !== '/login' && location.pathname !== '/register' && (
-                <Navbar />
-            )}
-
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/movies" element={<ProtectedRoutes userName={userName}>
+            <Route path="/movies" element={<ProtectedRoutes >
                 <Movies />
             </ProtectedRoutes>} />
-            <Route path="/moviedetails" element={<ProtectedRoutes userName={userName}>
-                <MovieDetails />
-            </ProtectedRoutes>} />
-            <Route path="/addmovie" element={<ProtectedRoutes userName={userName}>
-                <AddMovie />
-            </ProtectedRoutes>} />
-            <Route path="/admindashboard" element={<ProtectedRoutes userName={userName}>
-                <AdminDashboard />
-            </ProtectedRoutes>} />
+            <Route path="/mybookings" element={<ProtectedRoutes ><MyBookings /></ProtectedRoutes>} />
+            <Route path="/addmovie" element={<AdminRoute ><AddMovie /></AdminRoute>} />
+            <Route path="/admindashboard" element={<AdminRoute ><AdminDashboard /></AdminRoute>} />
         </Routes>
        </> 
     )
