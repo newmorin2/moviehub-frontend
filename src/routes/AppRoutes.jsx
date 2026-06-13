@@ -1,10 +1,6 @@
-import React from "react";
-import { Route, Routes } from "react-router";
-import { Navigate } from "react-router";
-import { Link } from "react-router";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import MyBookings from "../pages/MyBookings";
+import { Routes, Route } from "react-router-dom";
+
+import Home from "../pages/Home";
 import Movies from "../pages/Movies";
 import MovieDetails from "../pages/MovieDetails";
 import AddMovie from "../pages/AddMovie";
@@ -25,6 +21,9 @@ const AppRoutes = () => {
             <Route path="/movies" element={<ProtectedRoutes >
                 <Movies />
             </ProtectedRoutes>} />
+             <Route path="/movies/:id" element={<ProtectedRoutes >
+                <MovieDetails />
+            </ProtectedRoutes>} />                              
             <Route path="/mybookings" element={<ProtectedRoutes ><MyBookings /></ProtectedRoutes>} />
             <Route path="/addmovie" element={<AdminRoute ><AddMovie /></AdminRoute>} />
             <Route path="/admindashboard" element={<AdminRoute ><AdminDashboard /></AdminRoute>} />
@@ -33,4 +32,4 @@ const AppRoutes = () => {
     )
 }
 
-export default AppRoutes
+export default AppRoutes;
