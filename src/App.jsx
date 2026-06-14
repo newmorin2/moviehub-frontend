@@ -1,13 +1,38 @@
 import React from "react"
+import AppRoutes from "./routes/AppRoutes"
+import Navbar from "./components/standard/Navbar"
+import { AuthProvider,useAuth } from "./context/AuthContext"
 
-function App() {
+function AppContent(){
+  const { user } = useAuth
 
-
-  return (
-    <>
-
-    </>
+  return(
+    <div>
+      {user && <Navbar />}
+      <main>
+        <AppRoutes />
+      </main>
+    </div>
   )
+
 }
 
-export default App
+
+import Home from "./pages/Home";
+import Movies from "./pages/Movies";
+import AdminDashboard from "./pages/AdminDashboard";
+import AddMovie from "./pages/AddMovie";
+
+function App() {
+  return (
+    <>
+      <AuthProvider>
+          <div>
+            <AppContent />
+          </div>
+      </AuthProvider>
+    </>
+  );
+}
+
+export default App;
