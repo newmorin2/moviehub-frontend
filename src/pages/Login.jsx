@@ -1,111 +1,163 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 
-function Login(){
-    const [passwordVisibility, setPasswordVisibility] = useState(false)
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
+function Login() {
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    const { logIn } = useAuth();
-    const { signInWithGoogle } = useAuth();
-    const navigate = useNavigate();
+  const { logIn, logOut, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
 
-    const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
-      navigate("/"); 
+      const result = await signInWithGoogle();
+
+      if (result.user.email === "admin@gmail.com") {
+        navigate("/admin");
+      } else {
+        navigate("/movies");
+      }
     } catch (error) {
       console.error("Google Sign-In Error:", error.message);
+      setError("Google Sign-In failed.");
     }
-    };
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError("");
-        setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
 
-        try {
-        await logIn(email, password);
-        navigate("/"); 
-        } catch (err) {
-        setError("Failed to log in. Please check your credentials.");
-        } finally {
-        setLoading(false);
-        }
-    };
+    try {
+      const result = await logIn(email, password);
 
-    const togglePasswordVisibility = () =>{
-        setPasswordVisibility((p) => !p);
-    };
+      // Prevent admin from using user login page
+      if (result.user.email === "admin@gmail.com") {
+        setError("Please use the Admin Login page.");
+        await logOut();
+        return;
+      }
 
-    return(
-        <>
-        <div className="min-h-screen bg-linear-to-b from-red-600  to-gray-950 grid grid-cols-2 gap-20">
-            <div className="bg-white/50 rounded-2xl m-15 max-w-3xl p-5 max-h-fit">
-                <form onSubmit={handleSubmit} className="text-white rounded-xl flex flex-col gap-5 m-1 bg-black/20 p-7">
-                    <h2 className="font-bold text-2xl text-black">
-                        LOGIN TO YOUR ACCOUNT
-                    </h2>
-                    <label htmlFor="username">Enter your Email:</label>
-                    <input 
-                    type="text" 
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="border border-slate-300 rounded-md px-3 py-2 focus:bg-white/30 w-full focus:border-red-500 focus:ring-1"
-                    placeholder="Type your email..." />
-                    <label htmlFor="password">Enter your password:</label>
-                    <input 
-                    type={passwordVisibility ? "text" : "password"}
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="border border-slate-300 rounded-md px-3 py-2 focus:bg-white/30 w-full focus:border-red-500 focus:ring-1"
-                    placeholder="Type your password..." />
-                    <button
-                       type="button"
-                       className="bg-black/30 text-white font-bold p-2"
-                       onClick={togglePasswordVisibility}
-                    >
-                        {passwordVisibility ? 'Hide password' : 'Show password'}
-                    </button>
-                    <button 
-                    className="bg-black text-white font-bold p-2"
-                    type="submit">
-                        {loading ? "Logging In..." : "Log In"}
-                    </button>
-                    <button
-                        type="button" 
-                        className="bg-red-600 hover:bg-red-400 text-white font-bold p-4"
-                        onClick={handleGoogleSignIn}>
-                            Sign in with Google
-                    </button>
-                </form>
-                
+      navigate("/movies");
+    } catch (err) {
+      setError("Failed to log in. Please check your credentials.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisibility((prev) => !prev);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-red-600 to-gray-950 grid md:grid-cols-2 gap-10 p-6">
+      {/* Login Form */}
+      <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-4 bg-black/20 p-6 rounded-xl text-white"
+        >
+          <h2 className="font-bold text-3xl text-center">
+            LOGIN TO YOUR ACCOUNT
+          </h2>
+
+          {error && (
+            <div className="bg-red-500 text-white p-3 rounded">
+              {error}
             </div>
-            <div className="bg-white/50 border-white/60 rounded-2xl max-w-3xl m-15 p-8 max-h-fit">
-                <div className="bg-white/50 rounded-2xl m-20 p-10 text-center">
-                <h1 className="text-2xl font-semibold">
-                    WELCOME BACK TO
-                </h1>
-                <h1 className="text-4xl font-extrabold p-3">
-                    MovieHub
-                </h1>
-                <p className="text-2xl">Please Login to continue.</p>
-                <div className="bg-black/20 rounded-2xl p-3 m-3">
-                    <p className="text-2xl">Are you new here?</p>
-                    <Link to="/register" className="underline decoration-transparent transition duration-300 hover:decoration-inherit text-red-500">
-                       Register
-                    </Link>
-                </div>
-                </div>
-            </div>
+          )}
+
+          <label>Email</label>
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Type your email..."
+            className="border rounded-md px-3 py-2 text-white bg-transparent"
+          />
+
+          <label>Password</label>
+          <input
+            type={passwordVisibility ? "text" : "password"}
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Type your password..."
+            className="border rounded-md px-3 py-2 text-white bg-transparent"
+          />
+
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="bg-gray-700 hover:bg-gray-600 p-2 rounded"
+          >
+            {passwordVisibility ? "Hide Password" : "Show Password"}
+          </button>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-black hover:bg-gray-800 text-white font-bold p-3 rounded"
+          >
+            {loading ? "Logging In..." : "Log In"}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            className="bg-red-600 hover:bg-red-500 text-white font-bold p-3 rounded"
+          >
+            Sign in with Google
+          </button>
+
+          <div className="text-center">
+            <Link
+              to="/admin-login"
+              className="text-red-300 hover:underline"
+            >
+              Admin Login
+            </Link>
+          </div>
+        </form>
+      </div>
+
+      {/* Welcome Section */}
+      <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 flex items-center justify-center">
+        <div className="bg-white/30 rounded-2xl p-10 text-center w-full">
+          <h1 className="text-2xl font-semibold text-black">
+            WELCOME BACK TO
+          </h1>
+
+          <h1 className="text-5xl font-extrabold text-black my-4">
+            MovieHub
+          </h1>
+
+          <p className="text-xl text-black">
+            Please login to continue.
+          </p>
+
+          <div className="bg-black/20 rounded-xl p-4 mt-6">
+            <p className="text-lg text-black mb-2">
+              Are you new here?
+            </p>
+
+            <Link
+              to="/register"
+              className="text-red-600 font-bold hover:underline"
+            >
+              Register
+            </Link>
+          </div>
         </div>
-        </>
-    )
+      </div>
+    </div>
+  );
 }
 
 export default Login;

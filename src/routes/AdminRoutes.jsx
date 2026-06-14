@@ -1,18 +1,18 @@
-
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export default function AdminRoute({ children }) {
+export default function AdminRoute() {
   const { user } = useAuth();
+
+  const isAdmin = user?.email === "admin@gmail.com";
 
   if (!user) {
     return <Navigate to="/login" replace />;
   }
-  const isAdmin = user.email === "admin@gmail.com"; 
 
   if (!isAdmin) {
     return <Navigate to="/" replace />;
   }
 
-  return children;
+  return <Outlet />;
 }
