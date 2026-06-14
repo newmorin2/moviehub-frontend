@@ -1,5 +1,6 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { getMovies } from "../utils/helpers";
+import { movies } from "../data/movies";
 import SearchBar from "../components/movies/SearchBar";
 import MovieList from "../components/movies/MovieList";
 import Loader from "../components/standard/Loader";
@@ -10,8 +11,15 @@ export default function Movies() {
   const { movies, loading, error } = useMovies();
 //   const [movies,setMovies] = useState([])
   const [search, setSearch] = useState("");
-
-  const filteredMovies = movies.filter((movie) =>
+  const [movies, setMovies] = useState([]);
+  
+  useEffect(() => {
+    getMovies()
+      .then(data => setMovies(data))
+      .catch(err => console.error(err));
+  }, []);
+  
+  const filtered = movies.filter((movie) =>
     movie.title.toLowerCase().includes(search.toLowerCase())
   );
   const handleDeleteMovie = (id) => {
@@ -42,9 +50,14 @@ export default function Movies() {
         setSearch={setSearch}
       />
 
-      <div className="mt-6">
-        <MovieList movies={filteredMovies} onDelete={handleDeleteMovie} />
-      </div>
+      <MovieList movies={filtered} />
+       {movies.map(movie => (
+        <div key={movie.id}>
+          <h2>{movie.title}</h2>
+          <p>{movie.genre}</p>
+        </div>
+      ))}
+      
     </div>
   );
 }

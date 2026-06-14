@@ -18,6 +18,10 @@ function AppContent(){
 }
 
 
+import Home from "./pages/Home";
+import Movies from "./pages/Movies";
+import AdminDashboard from "./pages/AdminDashboard";
+import AddMovie from "./pages/AddMovie";
 
 function App() {
   return (
@@ -28,7 +32,7 @@ function App() {
           </div>
       </AuthProvider>
     </>
-  )
+  );
 }
 
 export default App;

@@ -1,13 +1,20 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
-function Home(){
-    return(
-        <>
-         <div className="min-h-screen bg-linear-to-b from-red-600  to-gray-950">
+function Home() {
+  return (
+    <>
+      <nav className="bg-gray-800 text-white p-4 flex gap-4">
+        <Link to="/">Home</Link>
+        <Link to="/movies">Movies</Link>
+        <Link to="/admin">Admin Dashboard</Link>
+      </nav>
 
-         </div>
-        </>
-    )
+      <div className="p-6">
+        <h1 className="text-3xl font-bold">MovieHub</h1>
+        <p>Welcome to MovieHub.</p>
+      </div>
+    </>
+  );
 }
 
 export default Home;

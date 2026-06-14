@@ -1,33 +1,151 @@
-import { deleteMovie } from "../../api/movieApi";
+// src/components/movies/MovieForm.jsx
 
-export default function MovieCard({ movie, onDelete }) {
+import { useState } from "react";
 
-  const handleDelete = async () => {
-    try {
-      await deleteMovie(movie.id);
-      onDelete(movie.id); // update UI
-    } catch (err) {
-      console.error("Delete failed", err);
-    }
+export default function MovieForm({
+  initialData = {},
+  onSubmit,
+  buttonText = "Save Movie",
+}) {
+  const [movie, setMovie] = useState({
+    title: initialData.title || "",
+    genre: initialData.genre || "",
+    description: initialData.description || "",
+    duration: initialData.duration || "",
+    price: initialData.price || "",
+    poster: initialData.poster || "",
+  });
+
+  const handleChange = (e) => {
+    setMovie({
+      ...movie,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(movie);
   };
 
   return (
-    <div className="bg-white shadow rounded-lg p-4">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-6 rounded-lg shadow-md space-y-4"
+    >
+      {/* Title */}
+      <div>
+        <label className="block mb-1 font-medium">
+          Movie Title
+        </label>
 
-      <img src={movie.poster} className="h-60 w-full object-cover" />
+        <input
+          type="text"
+          name="title"
+          value={movie.title}
+          onChange={handleChange}
+          className="w-full border rounded p-2"
+          required
+        />
+      </div>
 
-      <h2 className="text-lg font-bold mt-2">
-        {movie.title}
-      </h2>
+      {/* Genre */}
+      <div>
+        <label className="block mb-1 font-medium">
+          Genre
+        </label>
 
-      {/* ADMIN ONLY */}
+        <input
+          type="text"
+          name="genre"
+          value={movie.genre}
+          onChange={handleChange}
+          className="w-full border rounded p-2"
+          required
+        />
+      </div>
+
+      {/* Description */}
+      <div>
+        <label className="block mb-1 font-medium">
+          Description
+        </label>
+
+        <textarea
+          name="description"
+          value={movie.description}
+          onChange={handleChange}
+          rows="4"
+          className="w-full border rounded p-2"
+          required
+        />
+      </div>
+
+      {/* Duration */}
+      <div>
+        <label className="block mb-1 font-medium">
+          Duration (minutes)
+        </label>
+
+        <input
+          type="number"
+          name="duration"
+          value={movie.duration}
+          onChange={handleChange}
+          className="w-full border rounded p-2"
+          required
+        />
+      </div>
+
+      {/* Price */}
+      <div>
+        <label className="block mb-1 font-medium">
+          Ticket Price
+        </label>
+
+        <input
+          type="number"
+          step="0.01"
+          name="price"
+          value={movie.price}
+          onChange={handleChange}
+          className="w-full border rounded p-2"
+          required
+        />
+      </div>
+
+      {/* Poster */}
+      <div>
+        <label className="block mb-1 font-medium">
+          Poster URL
+        </label>
+
+        <input
+          type="text"
+          name="poster"
+          value={movie.poster}
+          onChange={handleChange}
+          className="w-full border rounded p-2"
+        />
+      </div>
+
+      {/* Preview */}
+      {movie.poster && (
+        <div>
+          <img
+            src={movie.poster}
+            alt={movie.title}
+            className="w-40 rounded-lg"
+          />
+        </div>
+      )}
+
       <button
-        onClick={handleDelete}
-        className="mt-3 bg-red-500 text-white px-3 py-1 rounded"
+        type="submit"
+        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
       >
-        Delete
+        {buttonText}
       </button>
-
-    </div>
+    </form>
   );
 }
