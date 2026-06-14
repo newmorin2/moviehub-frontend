@@ -21,6 +21,8 @@
     "@eslint/js": "^10.0.1",
     "@testing-library/react": "^16.3.2",
     "@tailwindcss/vite": "^4.3.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
@@ -28,9 +30,14 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+<<<<<<< HEAD
     "vitest": "^4.1.8"
+=======
+    "jsdom": "^29.1.1",
+>>>>>>> 3608d1a (modified vite.config but reverted & deleted test files)
     "tailwindcss": "^4.3.1",
-    "vite": "^8.0.12"
+    "vite": "^8.0.12",
+    "vitest": "^4.1.8"
   },
   "allowScripts": {
     "@firebase/util@1.15.1": true,
