@@ -4,16 +4,8 @@ import { useParams } from "react-router-dom";
 import Loader from "../components/standard/Loader";
 import { getMovieById } from "../api/movieApi";
 
-function MovieDetails(){
+export default function MovieDetails() {
   const { id } = useParams();
-    return(
-        <>
-         <div className="min-h-screen bg-linear-to-b from-red-600  to-gray-950">
-
-         </div>
-        </>
-    )
-}
 
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
