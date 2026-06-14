@@ -40,7 +40,7 @@ export const movies = [
     title: "Avengers: Endgame",
     genre: "Action",
     duration: "181 mins",
-    poster: "https://via.placeholder.com/300x450",
+    poster: "https://picsum.photos/300/450",
     description: "The Avengers assemble for one final battle."
   },
   {
@@ -48,7 +48,7 @@ export const movies = [
     title: "Inception",
     genre: "Sci-Fi",
     duration: "148 mins",
-    poster: "https://via.placeholder.com/300x450",
+    poster: "https://unsplash.com/photos/gold-pyramid-on-brown-wooden-table-LiLPRqxWI9I",
     description: "A thief enters dreams to steal secrets."
   },
   {
@@ -56,7 +56,7 @@ export const movies = [
     title: "Interstellar",
     genre: "Sci-Fi",
     duration: "169 mins",
-    poster: "https://via.placeholder.com/300x450",
+    poster: "https://picsum.photos/300/450",
     description: "Explorers travel through a wormhole in space."
   }
 ];

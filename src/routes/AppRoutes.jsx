@@ -2,6 +2,9 @@ import { Routes, Route } from "react-router-dom";
 
 // Pages
 import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Register from "../pages/Register"
+import MyBookings from "../pages/MyBookings"
 import Movies from "../pages/Movies";
 import MovieDetails from "../pages/MovieDetails";
 import AddMovie from "../pages/AddMovie";
