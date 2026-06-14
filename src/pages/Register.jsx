@@ -45,67 +45,96 @@ function Register(){
 
     return(
         <>
-        <div className="min-h-screen bg-linear-to-b from-red-600  to-gray-950 grid grid-cols-2 gap-20">
-            <div className="bg-white/50 rounded-2xl m-15 max-w-3xl p-5 max-h-fit">
-                <form onSubmit={handleSubmit} className="text-white rounded-xl flex flex-col gap-5 m-1 bg-black/20 p-7">
-                    <h2 className="font-bold text-2xl text-black">
-                        Register your account
-                    </h2>
-                    <label htmlFor="email">Enter your email:</label>
-                    <input 
-                    type="email" 
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="border border-slate-300 rounded-md px-3 py-2 focus:bg-white/30 w-full focus:border-blue-500"
-                    placeholder="Type your email..." />
-                    <label htmlFor="password">Enter your password:</label>
-                    <input 
-                    type={passwordVisibility ? "text" : "password"}
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="border border-slate-300 rounded-md px-3 py-2 focus:bg-white/30 w-full focus:border-blue-500"
-                    placeholder="Type your password..." />
-                    <button
-                       type="button"
-                       onClick={togglePasswordVisibility}
-                    >
-                        {passwordVisibility ? 'Hide password' : 'Show password'}
-                    </button>
-                    <button 
-                    type="submit"
-                    className="bg-black text-white font-bold p-2"
-                    disabled={loading}>
-                        {loading ? "Creating Account..." : "Sign Up"}
-                    </button>
-                    <button
-                 type="button"
-                 className="bg-red-600 hover:bg-red-400 text-white font-bold p-4"
-                 onClick={handleGoogleSignIn}>
-                    Sign up with Google
-                </button>
-                </form>
-                
-            </div>
-            <div className="bg-white/50 border-white/60 rounded-2xl max-w-3xl m-15 p-8 max-h-fit">
-                <div className="bg-white/50 rounded-2xl m-20 p-10 text-center">
-                <h1 className="text-2xl font-semibold"> 
-                    Welcome to
-                </h1>
-                <h1 className="text-4xl font-extrabold p-3">
-                    MovieHub
-                </h1>
-                <p className="text-2xl">Please register to continue.</p>
-                <div className="bg-black/20 rounded-2xl p-3 m-3">
-                    <p className="text-2xl">Already a member?</p>
-                    <Link to="/login" className="underline decoration-transparent transition duration-300 hover:decoration-inherit text-red-500">
-                      login
-                    </Link>
-                </div>
-                </div>
-            </div>
-        </div>        
+        <div className="min-h-screen bg-linear-to-b from-red-600 to-gray-1050 flex items-center justify-center px-6 py-10">
+  
+  <div className="grid md:grid-cols-2 gap-10 w-full max-w-6xl">
+
+    <div className="bg-white/20 backdrop-blur-lg rounded-2xl shadow-2xl p-8">
+      
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 text-white"
+      >
+        <h2 className="text-3xl font-bold text-gray-800 mb-2">
+          Create Account
+        </h2>
+
+        <label className="text-sm">Email</label>
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="px-4 py-2 rounded-md text-black outline-none border focus:ring-2 focus:ring-red-500"
+          placeholder="Enter your email"
+        />
+
+        <label className="text-sm">Password</label>
+        <input
+          type={passwordVisibility ? "text" : "password"}
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="px-4 py-2 rounded-md text-black outline-none border focus:ring-2 focus:ring-red-500"
+          placeholder="Enter your password"
+        />
+
+        <button
+          type="button"
+          onClick={togglePasswordVisibility}
+          className="text-sm text-red-200 hover:text-white self-start"
+        >
+          {passwordVisibility ? "Hide password" : "Show password"}
+        </button>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-gray-800 hover:bg-gray-900 transition text-white font-bold py-2 rounded-md mt-2"
+        >
+          {loading ? "Creating Account..." : "Sign Up"}
+        </button>
+
+        <button
+          type="button"
+          onClick={handleGoogleSignIn}
+          className="bg-red-500 hover:bg-red-600 transition text-white font-bold py-2 rounded-md"
+        >
+          Sign up with Google
+        </button>
+      </form>
+    </div>
+
+    <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-10 flex flex-col justify-center text-center text-white">
+
+      <h1 className="text-xl font-light">
+        Welcome to
+      </h1>
+
+      <h1 className="text-5xl font-extrabold text-red-500 my-2">
+        MovieHub
+      </h1>
+
+      <p className="text-lg text-gray-200 mb-6">
+        Book, Enjoy 
+      </p>
+
+      <div className="bg-black/30 rounded-xl p-5">
+        <p className="text-lg mb-2">
+          Already a member?
+        </p>
+
+        <Link
+          to="/login"
+          className="text-red-400 font-bold hover:underline"
+        >
+          Login here
+        </Link>
+      </div>
+
+    </div>
+  </div>
+</div>
         </>
     )
 }

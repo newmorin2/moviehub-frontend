@@ -51,7 +51,10 @@ export default function MovieDetails() {
       <img
         src={movie.poster}
         alt={movie.title}
-        className="w-full rounded-lg shadow-lg"
+        className="w-full rounded-lg shadow-lg "
+        onError={(e) => {
+          e.target.src = "https://picsum.photos/800/400";
+        }}
       />
 
       <h1 className="text-4xl font-bold mt-6">

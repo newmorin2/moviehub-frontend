@@ -8,13 +8,17 @@ import useMovies from "../hooks/useMovies";
 
 export default function Movies() {
   const { movies, loading, error } = useMovies();
-
+//   const [movies,setMovies] = useState([])
   const [search, setSearch] = useState("");
 
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(search.toLowerCase())
   );
-
+  const handleDeleteMovie = (id) => {
+  setMovies((prevMovies) =>
+    prevMovies.filter((movie) => movie.id !== id)
+    );
+    };
   if (loading) {
     return <Loader />;
   }
@@ -28,7 +32,7 @@ export default function Movies() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto p-6 ">
       <h1 className="text-3xl font-bold mb-6">
         Movies
       </h1>
@@ -39,7 +43,7 @@ export default function Movies() {
       />
 
       <div className="mt-6">
-        <MovieList movies={filteredMovies} />
+        <MovieList movies={filteredMovies} onDelete={handleDeleteMovie} />
       </div>
     </div>
   );

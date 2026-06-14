@@ -1,16 +1,18 @@
 import axios from "axios";
-import {movies as mockMovies} from "../data/movies"
 
-// const API_URL = "http://localhost:8000";
+const API_URL = "http://127.0.0.1:8000";
 
 export const getMovies = async () => {
-  return Promise.resolve(mockMovies);
+  const response = await axios.get(`${API_URL}/movies`);
+  return response.data;
 };
 
 export const getMovieById = async (id) => {
-  const movie = mockMovies.find(
-    (movie) => movie.id === Number(id)
-  );
+  const response = await axios.get(`${API_URL}/movies/${id}`);
+  return response.data;
+};
 
-  return Promise.resolve(movie);
+export const deleteMovie = async (id) => {
+  const response = await axios.delete(`${API_URL}/movies/${id}`);
+  return response.data;
 };
