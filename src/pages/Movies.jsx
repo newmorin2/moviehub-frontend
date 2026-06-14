@@ -12,11 +12,14 @@ export default function Movies() {
 //   const [movies,setMovies] = useState([])
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
-  
+
   useEffect(() => {
     getMovies()
-      .then(data => setMovies(data))
-      .catch(err => console.error(err));
+      .then((data) => {
+        console.log(data);
+        setMovies(data);
+      })
+      .catch((err) => console.error(err));
   }, []);
   
   const filtered = movies.filter((movie) =>
@@ -45,19 +48,28 @@ export default function Movies() {
         Movies
       </h1>
 
+      {movies.map((movie) => (
+        <div
+          key={movie.id}
+          className="border p-4 mb-4 rounded"
+        >
+          <h2 className="text-xl font-bold">
+            {movie.title}
+          </h2>
       <SearchBar
         search={search}
         setSearch={setSearch}
       />
 
-      <MovieList movies={filtered} />
-       {movies.map(movie => (
-        <div key={movie.id}>
-          <h2>{movie.title}</h2>
           <p>{movie.genre}</p>
+
+          <p>{movie.description}</p>
+
+          <p>{movie.release_year}</p>
+
+          <p>{movie.rating}</p>
         </div>
       ))}
-      
     </div>
   );
 }

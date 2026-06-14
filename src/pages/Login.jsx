@@ -1,141 +1,163 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 
-function Login(){
-    const [passwordVisibility, setPasswordVisibility] = useState(false)
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
+function Login() {
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    const { logIn } = useAuth();
-    const { signInWithGoogle } = useAuth();
-    const navigate = useNavigate();
+  const { logIn, logOut, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
 
-    const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
-      navigate("/"); 
+      const result = await signInWithGoogle();
+
+      if (result.user.email === "admin@gmail.com") {
+        navigate("/admin");
+      } else {
+        navigate("/movies");
+      }
     } catch (error) {
       console.error("Google Sign-In Error:", error.message);
+      setError("Google Sign-In failed.");
     }
-    };
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError("");
-        setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
 
-        try {
-        await logIn(email, password);
-        navigate("/"); 
-        } catch (err) {
-        setError("Failed to log in. Please check your credentials.");
-        } finally {
-        setLoading(false);
-        }
-    };
+    try {
+      const result = await logIn(email, password);
 
-    const togglePasswordVisibility = () =>{
-        setPasswordVisibility((p) => !p);
-    };
+      // Prevent admin from using user login page
+      if (result.user.email === "admin@gmail.com") {
+        setError("Please use the Admin Login page.");
+        await logOut();
+        return;
+      }
 
-    return(
-        <>
-        <div className="min-h-screen bg-linear-to-b from-red-600 to-gray-1050 flex items-center justify-center px-6 py-10">
+      navigate("/movies");
+    } catch (err) {
+      setError("Failed to log in. Please check your credentials.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  <div className="grid md:grid-cols-2 gap-10 w-full max-w-6xl">
+  const togglePasswordVisibility = () => {
+    setPasswordVisibility((prev) => !prev);
+  };
 
-    <div className="bg-white/20 backdrop-blur-lg rounded-2xl shadow-2xl p-8">
-
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-4 text-white"
-      >
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">
-          Login to your account
-        </h2>
-
-        <label className="text-sm">Email</label>
-        <input
-          type="text"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="px-4 py-2 rounded-md text-black outline-none border focus:ring-2 focus:ring-red-500"
-          placeholder="Enter your email"
-        />
-
-        <label className="text-sm">Password</label>
-        <input
-          type={passwordVisibility ? "text" : "password"}
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="px-4 py-2 rounded-md text-black outline-none border focus:ring-2 focus:ring-red-500"
-          placeholder="Enter your password"
-        />
-
-        <button
-          type="button"
-          onClick={togglePasswordVisibility}
-          className="text-sm text-red-200 hover:text-white self-start"
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-red-600 to-gray-950 grid md:grid-cols-2 gap-10 p-6">
+      {/* Login Form */}
+      <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-4 bg-black/20 p-6 rounded-xl text-white"
         >
-          {passwordVisibility ? "Hide password" : "Show password"}
-        </button>
+          <h2 className="font-bold text-3xl text-center">
+            LOGIN TO YOUR ACCOUNT
+          </h2>
 
-        <button
-          type="submit"
-          className="bg-gray-800 hover:bg-gray-900 transition text-white font-bold py-2 rounded-md mt-2"
-        >
-          {loading ? "Logging in..." : "Log In"}
-        </button>
+          {error && (
+            <div className="bg-red-500 text-white p-3 rounded">
+              {error}
+            </div>
+          )}
 
-        <button
-          type="button"
-          onClick={handleGoogleSignIn}
-          className="bg-red-500 hover:bg-red-600 transition text-white font-bold py-2 rounded-md"
-        >
-          Sign in with Google
-        </button>
+          <label>Email</label>
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Type your email..."
+            className="border rounded-md px-3 py-2 text-white bg-transparent"
+          />
 
-      </form>
-    </div>
+          <label>Password</label>
+          <input
+            type={passwordVisibility ? "text" : "password"}
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Type your password..."
+            className="border rounded-md px-3 py-2 text-white bg-transparent"
+          />
 
-    <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-10 flex flex-col justify-center text-center text-white">
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="bg-gray-700 hover:bg-gray-600 p-2 rounded"
+          >
+            {passwordVisibility ? "Hide Password" : "Show Password"}
+          </button>
 
-      <h1 className="text-xl font-light">
-        Welcome back to
-      </h1>
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-black hover:bg-gray-800 text-white font-bold p-3 rounded"
+          >
+            {loading ? "Logging In..." : "Log In"}
+          </button>
 
-      <h1 className="text-5xl font-extrabold text-red-500 my-2">
-        MovieHub
-      </h1>
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            className="bg-red-600 hover:bg-red-500 text-white font-bold p-3 rounded"
+          >
+            Sign in with Google
+          </button>
 
-      <p className="text-lg text-gray-200 mb-6">
-        Book, Enjoy
-      </p>
-
-      <div className="bg-black/30 rounded-xl p-5">
-        <p className="text-lg mb-2">
-          New here?
-        </p>
-
-        <Link
-          to="/register"
-          className="text-red-500 font-bold hover:underline"
-        >
-          Create an account
-        </Link>
+          <div className="text-center">
+            <Link
+              to="/admin-login"
+              className="text-red-300 hover:underline"
+            >
+              Admin Login
+            </Link>
+          </div>
+        </form>
       </div>
 
-    </div>
+      {/* Welcome Section */}
+      <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 flex items-center justify-center">
+        <div className="bg-white/30 rounded-2xl p-10 text-center w-full">
+          <h1 className="text-2xl font-semibold text-black">
+            WELCOME BACK TO
+          </h1>
 
-  </div>
-</div>
-        </>
-    )
+          <h1 className="text-5xl font-extrabold text-black my-4">
+            MovieHub
+          </h1>
+
+          <p className="text-xl text-black">
+            Please login to continue.
+          </p>
+
+          <div className="bg-black/20 rounded-xl p-4 mt-6">
+            <p className="text-lg text-black mb-2">
+              Are you new here?
+            </p>
+
+            <Link
+              to="/register"
+              className="text-red-600 font-bold hover:underline"
+            >
+              Register
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Login;

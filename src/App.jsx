@@ -1,37 +1,28 @@
-import React from "react"
-import AppRoutes from "./routes/AppRoutes"
-import Navbar from "./components/standard/Navbar"
-import { AuthProvider,useAuth } from "./context/AuthContext"
+import React from "react";
+import { useLocation } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+import Navbar from "./components/standard/Navbar";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 
-function AppContent(){
-  const { user } = useAuth
+function AppContent() {
+  const location = useLocation();
 
-  return(
-    <div>
-      {user && <Navbar />}
-      <main>
-        <AppRoutes />
-      </main>
-    </div>
-  )
+  const isAdminPage =
+    location.pathname.startsWith("/admin");
 
+  return (
+    <>
+      {!isAdminPage && <Navbar />}
+      <AppRoutes />
+    </>
+  );
 }
-
-
-import Home from "./pages/Home";
-import Movies from "./pages/Movies";
-import AdminDashboard from "./pages/AdminDashboard";
-import AddMovie from "./pages/AddMovie";
 
 function App() {
   return (
-    <>
-      <AuthProvider>
-          <div>
-            <AppContent />
-          </div>
-      </AuthProvider>
-    </>
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 
