@@ -1,23 +1,51 @@
 import { useState } from "react";
-import { movies } from "../data/movies";
 
 import SearchBar from "../components/movies/SearchBar";
 import MovieList from "../components/movies/MovieList";
+import Loader from "../components/standard/Loader";
+
+import useMovies from "../hooks/useMovies";
 
 export default function Movies() {
+  const { movies, loading, error } = useMovies();
+
   const [search, setSearch] = useState("");
 
-  const filtered = movies.filter((movie) =>
+  const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(search.toLowerCase())
   );
 
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500 mt-10">
+        {error}
+      </div>
+    );
+  }
+
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-linear-to-b from-red-600  to-gray-950">
       <h1 className="text-3xl font-bold mb-4">Movies</h1>
+=======
+    <div className="max-w-7xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">
+        Movies
+      </h1>
+>>>>>>> bbff498 (changed some imports,implemented loader&added error message)
 
-      <SearchBar search={search} setSearch={setSearch} />
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+      />
 
-      <MovieList movies={filtered} />
+      <div className="mt-6">
+        <MovieList movies={filteredMovies} />
+      </div>
     </div>
   );
 }
