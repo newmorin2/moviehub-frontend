@@ -1,24 +1,28 @@
-import { Routes, Route } from "react-router-dom";
-
+import React from "react";
+import { useLocation } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
 import Navbar from "./components/standard/Navbar";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 
-import Home from "./pages/Home";
-import Movies from "./pages/Movies";
-import AdminDashboard from "./pages/AdminDashboard";
-import AddMovie from "./pages/AddMovie";
+function AppContent() {
+  const location = useLocation();
+
+  const isAdminPage =
+    location.pathname.startsWith("/admin");
+
+  return (
+    <>
+      {!isAdminPage && <Navbar />}
+      <AppRoutes />
+    </>
+  );
+}
 
 function App() {
   return (
-    <>
-      <Navbar />
-
-<Routes>
-  <Route path="/" element={<Home />} />
- 
-  <Route path="/admin" element={<AdminDashboard />} />
-  <Route path="/admin/add" element={<AddMovie />} />
-</Routes>
-    </>
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

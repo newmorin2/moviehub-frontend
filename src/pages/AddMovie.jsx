@@ -61,6 +61,7 @@ export default function AddMovie() {
   };
 
   return (
+   <div className="min-h-screen bg-linear-to-b from-red-600  to-gray-950">
     <div className="max-w-xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">
         Add Movie
@@ -128,5 +129,6 @@ export default function AddMovie() {
         </button>
       </form>
     </div>
+   </div>
   );
 }
