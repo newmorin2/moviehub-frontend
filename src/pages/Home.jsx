@@ -4,8 +4,7 @@ function Home() {
   return (
     <>
       <nav className="bg-gray-800 text-white p-4 flex gap-4">
-        <Link to="/">Home</Link>
-        <Link to="/movies">Movies</Link>
+      
         <Link to="/admin">Admin Dashboard</Link>
       </nav>
 
