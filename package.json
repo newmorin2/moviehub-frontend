@@ -1,15 +1,24 @@
 {
+<<<<<<< HEAD
   "name": "frontend",
+=======
+  "name": "moviehub-frontend",
+>>>>>>> 5ca5cfeb0c9f576e9493b70936a7b1385371e050
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+<<<<<<< HEAD
     "build": "tsc -b && vite build",
+=======
+    "build": "vite build",
+>>>>>>> 5ca5cfeb0c9f576e9493b70936a7b1385371e050
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@heroicons/react": "^2.2.0",
     "axios": "^1.17.0",
     "react": "^19.2.6",
@@ -22,6 +31,19 @@
     "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.3.0",
     "@types/node": "^24.12.3",
+=======
+    "axios": "^1.17.0",
+    "firebase": "^12.14.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router": "^7.17.0",
+    "react-router-dom": "^7.17.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@tailwindcss/vite": "^4.3.1",
+>>>>>>> 5ca5cfeb0c9f576e9493b70936a7b1385371e050
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
@@ -29,9 +51,19 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+<<<<<<< HEAD
     "tailwindcss": "^4.3.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.12"
+=======
+    "vitest": "^4.1.8",
+    "tailwindcss": "^4.3.1",
+    "vite": "^8.0.12"
+  },
+  "allowScripts": {
+    "@firebase/util@1.15.1": true,
+    "protobufjs@7.6.4": true
+>>>>>>> 5ca5cfeb0c9f576e9493b70936a7b1385371e050
   }
 }
