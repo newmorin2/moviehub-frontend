@@ -27,7 +27,6 @@ function Navbar() {
             </Link>
           )}
 
-          {/* Admin Button */}
           {!user && (
             <Link
   to="/admin/login"

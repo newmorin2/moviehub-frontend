@@ -9,7 +9,6 @@ import useMovies from "../hooks/useMovies";
 
 export default function Movies() {
   const { movies, loading, error } = useMovies();
-//   const [movies,setMovies] = useState([])
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
 

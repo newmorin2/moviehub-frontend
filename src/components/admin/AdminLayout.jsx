@@ -1,5 +1,3 @@
-// src/components/admin/AdminLayout.jsx
-
 import { Outlet } from "react-router-dom";
 import AdminNavbar from "./AdminNavbar";
 import AdminSidebar from "./AdminSidebar";

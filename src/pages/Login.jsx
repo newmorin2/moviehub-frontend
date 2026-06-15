@@ -35,7 +35,6 @@ function Login() {
     try {
       const result = await logIn(email, password);
 
-      // Prevent admin from using user login page
       if (result.user.email === "admin@gmail.com") {
         setError("Please use the Admin Login page.");
         await logOut();
@@ -56,7 +55,6 @@ function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-red-600 to-gray-950 grid md:grid-cols-2 gap-10 p-6">
-      {/* Login Form */}
       <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8">
         <form
           onSubmit={handleSubmit}
@@ -127,7 +125,6 @@ function Login() {
         </form>
       </div>
 
-      {/* Welcome Section */}
       <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 flex items-center justify-center">
         <div className="bg-white/30 rounded-2xl p-10 text-center w-full">
           <h1 className="text-2xl font-semibold text-black">

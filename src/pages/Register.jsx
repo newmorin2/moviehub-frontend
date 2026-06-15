@@ -32,7 +32,7 @@ function Register(){
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      navigate("/"); // Redirect to homepage on success
+      navigate("/"); 
     } catch (error) {
       console.error("Google Sign-In Error:", error.message);
     }

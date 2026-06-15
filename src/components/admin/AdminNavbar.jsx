@@ -1,5 +1,3 @@
-// src/components/admin/AdminNavbar.jsx
-
 import { useAuth } from "../../context/AuthContext";
 
 export default function AdminNavbar() {

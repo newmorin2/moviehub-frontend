@@ -1,5 +1,3 @@
-// src/components/movies/MovieForm.jsx
-
 import { useState } from "react";
 
 export default function MovieForm({
@@ -33,7 +31,6 @@ export default function MovieForm({
       onSubmit={handleSubmit}
       className="bg-white p-6 rounded-lg shadow-md space-y-4"
     >
-      {/* Title */}
       <div>
         <label className="block mb-1 font-medium">
           Movie Title
@@ -49,7 +46,6 @@ export default function MovieForm({
         />
       </div>
 
-      {/* Genre */}
       <div>
         <label className="block mb-1 font-medium">
           Genre
@@ -65,7 +61,6 @@ export default function MovieForm({
         />
       </div>
 
-      {/* Description */}
       <div>
         <label className="block mb-1 font-medium">
           Description
@@ -81,7 +76,6 @@ export default function MovieForm({
         />
       </div>
 
-      {/* Duration */}
       <div>
         <label className="block mb-1 font-medium">
           Duration (minutes)
@@ -97,7 +91,6 @@ export default function MovieForm({
         />
       </div>
 
-      {/* Price */}
       <div>
         <label className="block mb-1 font-medium">
           Ticket Price
@@ -114,7 +107,6 @@ export default function MovieForm({
         />
       </div>
 
-      {/* Poster */}
       <div>
         <label className="block mb-1 font-medium">
           Poster URL
@@ -129,7 +121,6 @@ export default function MovieForm({
         />
       </div>
 
-      {/* Preview */}
       {movie.poster && (
         <div>
           <img
