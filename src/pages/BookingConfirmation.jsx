@@ -17,7 +17,10 @@ const BookingConfirmation = () => {
     return null;
   }
 
-  const { booking, selectedSeats } = state;
+  const { booking } = state;
+  const seatsLabel = booking.seat_numbers
+    ? booking.seat_numbers.join(', ')
+    : `${booking.seats_booked || 1} seat`;
 
   const downloadTicket = () => {
     const ticketHtml = `
@@ -46,8 +49,8 @@ const BookingConfirmation = () => {
             <div class="row"><strong>Theater:</strong> ${booking.show.theater}</div>
             <div class="row"><strong>Date:</strong> ${new Date(booking.show.show_time).toLocaleDateString()}</div>
             <div class="row"><strong>Time:</strong> ${new Date(booking.show.show_time).toLocaleTimeString()}</div>
-            <div class="row"><strong>Seats:</strong> ${selectedSeats.join(', ')}</div>
-            <div class="row"><strong>Total Amount:</strong> ₹${booking.total_amount}</div>
+            <div class="row"><strong>Seats:</strong> ${seatsLabel}</div>
+            <div class="row"><strong>Total Amount:</strong> Ksh ${booking.total_amount}</div>
           </div>
           <div class="footer">
             <p>Thank you for booking with us!</p>
@@ -110,7 +113,7 @@ const BookingConfirmation = () => {
           <div className="flex justify-between items-center pb-3 border-b border-gray-700">
             <span className="text-gray-400">Seats:</span>
             <span className="text-white font-bold text-lg">
-              {selectedSeats.join(', ')}
+              {booking.seat_numbers?.join(', ') || `${booking.seats_booked || 1} seat`}
             </span>
           </div>
           
@@ -121,7 +124,7 @@ const BookingConfirmation = () => {
           
           <div className="flex justify-between items-center pt-3">
             <span className="text-gray-400 text-lg">Total Amount Paid:</span>
-            <span className="text-red-500 text-2xl font-bold">₹{booking.total_amount}</span>
+            <span className="text-red-500 text-2xl font-bold">Ksh {booking.total_amount}</span>
           </div>
         </div>
       </div>
@@ -134,7 +137,7 @@ const BookingConfirmation = () => {
           Download Ticket
         </button>
         <button
-          onClick={() => navigate('/bookings')}
+          onClick={() => navigate('/my-bookings')}
           className="flex-1 bg-gray-700 text-white py-3 rounded-lg font-semibold hover:bg-gray-600 transition-colors"
         >
           View My Bookings

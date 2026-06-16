@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { TicketIcon, CalendarIcon, ClockIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
 const MyBookings = () => {
@@ -113,7 +113,7 @@ const MyBookings = () => {
               </div>
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-red-500">₹{booking.total_amount}</p>
+              <p className="text-2xl font-bold text-red-500">Ksh {booking.total_amount}</p>
               <p className="text-gray-400 text-sm">{booking.seats_booked} ticket(s)</p>
             </div>
           </div>

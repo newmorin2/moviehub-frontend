@@ -6,7 +6,10 @@ import Register from "../pages/Register"
 import MyBookings from "../pages/MyBookings"
 import Movies from "../pages/Movies";
 import MovieDetails from "../pages/MovieDetails";
+import Booking from "../pages/Booking";
+import BookingConfirmation from "../pages/BookingConfirmation";
 import AddMovie from "../pages/AddMovie";
+import EditMovie from "../pages/EditMovie";
 import AdminDashboard from "../pages/AdminDashboard";
 import AdminLogin from "../pages/AdminLogin";
 
@@ -23,6 +26,7 @@ const AppRoutes = () => {
       <Route path="/movies/:id" element={<MovieDetails />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/booking-confirmation" element={<BookingConfirmation />} />
 
       <Route path="/admin/login" element={<AdminLogin />} />
 
@@ -30,10 +34,12 @@ const AppRoutes = () => {
         <Route element={<AdminLayout />}>
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/add" element={<AddMovie />} />
+          <Route path="/admin/edit/:id" element={<EditMovie />} />
         </Route>
       </Route>
 
       <Route element={<ProtectedRoutes />}>
+        <Route path="/booking/:showId" element={<Booking />} />
         <Route path="/my-bookings" element={<MyBookings />} />
       </Route>
     </Routes>

@@ -8,6 +8,7 @@ export default function AddMovie() {
     description: "",
     release_year: "",
     rating: "",
+    price: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -26,9 +27,10 @@ export default function AddMovie() {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:8000/movies",
+        "http://localhost:8000/movies/",
         {
           ...formData,
+          price: Number(formData.price),
           release_year: Number(formData.release_year),
           rating: Number(formData.rating),
         }
@@ -41,6 +43,7 @@ export default function AddMovie() {
         title: "",
         genre: "",
         description: "",
+        price: "",
         release_year: "",
         rating: "",
       });
@@ -61,7 +64,7 @@ export default function AddMovie() {
   };
 
   return (
-   <div className="min-h-screen bg-linear-to-b from-red-600  to-gray-950">
+   <div className="min-h-screen bg-linear-to-b">
     <div className="max-w-xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">
         Add Movie
@@ -92,6 +95,18 @@ export default function AddMovie() {
           name="description"
           placeholder="Description"
           value={formData.description}
+          onChange={handleChange}
+          className="w-full border p-2 rounded"
+          required
+        />
+
+        <input
+          type="number"
+          step="0.01"
+          min="0"
+          name="price"
+          placeholder="Ticket Price"
+          value={formData.price}
           onChange={handleChange}
           className="w-full border p-2 rounded"
           required

@@ -11,6 +11,8 @@ export default function MovieForm({
     description: initialData.description || "",
     duration: initialData.duration || "",
     price: initialData.price || "",
+    release_year: initialData.release_year || "",
+    rating: initialData.rating || "",
     poster: initialData.poster || "",
   });
 
@@ -23,7 +25,14 @@ export default function MovieForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(movie);
+    onSubmit({
+      ...movie,
+      price: movie.price !== "" ? parseFloat(movie.price) : movie.price,
+      duration: movie.duration !== "" ? movie.duration.toString() : movie.duration,
+      release_year:
+        movie.release_year !== "" ? parseInt(movie.release_year, 10) : movie.release_year,
+      rating: movie.rating !== "" ? parseFloat(movie.rating) : movie.rating,
+    });
   };
 
   return (
@@ -99,11 +108,43 @@ export default function MovieForm({
         <input
           type="number"
           step="0.01"
+          min="0"
           name="price"
           value={movie.price}
           onChange={handleChange}
           className="w-full border rounded p-2"
           required
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium">
+          Release Year
+        </label>
+
+        <input
+          type="number"
+          name="release_year"
+          value={movie.release_year}
+          onChange={handleChange}
+          className="w-full border rounded p-2"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-1 font-medium">
+          Rating
+        </label>
+
+        <input
+          type="number"
+          step="0.1"
+          min="0"
+          max="10"
+          name="rating"
+          value={movie.rating}
+          onChange={handleChange}
+          className="w-full border rounded p-2"
         />
       </div>
 

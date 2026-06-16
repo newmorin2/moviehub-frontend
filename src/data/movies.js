@@ -41,7 +41,8 @@ export const movies = [
     genre: "Action",
     duration: "181 mins",
     poster: "https://picsum.photos/300/450",
-    description: "The Avengers assemble for one final battle."
+    description: "The Avengers assemble for one final battle.",
+    price: 280
   },
   {
     id: 2,
@@ -49,7 +50,8 @@ export const movies = [
     genre: "Sci-Fi",
     duration: "148 mins",
     poster: "https://unsplash.com/photos/gold-pyramid-on-brown-wooden-table-LiLPRqxWI9I",
-    description: "A thief enters dreams to steal secrets."
+    description: "A thief enters dreams to steal secrets.",
+    price: 240
   },
   {
     id: 3,
@@ -57,6 +59,7 @@ export const movies = [
     genre: "Sci-Fi",
     duration: "169 mins",
     poster: "https://picsum.photos/300/450",
-    description: "Explorers travel through a wormhole in space."
+    description: "Explorers travel through a wormhole in space.",
+    price: 260
   }
 ];

@@ -45,11 +45,11 @@ function Register(){
 
     return(
         <>
-        <div className="min-h-screen bg-linear-to-b from-red-600 to-gray-1050 flex items-center justify-center px-6 py-10">
+        <div className="min-h-screen bg-linear-to-b from-red-600 to-gray-950 flex items-center justify-center px-6 py-10">
   
   <div className="grid md:grid-cols-2 gap-10 w-full max-w-6xl">
 
-    <div className="bg-white/20 backdrop-blur-lg rounded-2xl shadow-2xl p-8">
+    <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8">
       
       <form
         onSubmit={handleSubmit}

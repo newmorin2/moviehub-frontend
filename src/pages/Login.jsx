@@ -54,8 +54,8 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-red-600 to-gray-950 grid md:grid-cols-2 gap-10 p-6">
-      <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8">
+    <div className="min-h-screen bg-linear-to-b from-red-600 to-gray-950 grid md:grid-cols-2 gap-10 p-6">
+      <div className="bg-white/10 backdrop-blur-lg shadow-2xl  rounded-2xl p-8">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col gap-4 bg-black/20 p-6 rounded-xl text-white"
@@ -91,17 +91,16 @@ function Login() {
           />
 
           <button
-            type="button"
-            onClick={togglePasswordVisibility}
-            className="bg-gray-700 hover:bg-gray-600 p-2 rounded"
-          >
-            {passwordVisibility ? "Hide Password" : "Show Password"}
-          </button>
+          type="button"
+          onClick={togglePasswordVisibility}
+          className="text-sm text-red-200 hover:text-white self-start">
+          {passwordVisibility ? "Hide password" : "Show password"}
+        </button>
 
           <button
             type="submit"
             disabled={loading}
-            className="bg-black hover:bg-gray-800 text-white font-bold p-3 rounded"
+            className="bg-gray-800 hover:bg-gray-900 transition text-white font-bold py-2 rounded-md mt-2"
           >
             {loading ? "Logging In..." : "Log In"}
           </button>
@@ -109,38 +108,32 @@ function Login() {
           <button
             type="button"
             onClick={handleGoogleSignIn}
-            className="bg-red-600 hover:bg-red-500 text-white font-bold p-3 rounded"
+            className="bg-red-500 hover:bg-red-600 transition text-white font-bold py-2 rounded-md"
           >
             Sign in with Google
           </button>
 
           <div className="text-center">
-            <Link
-              to="/admin-login"
-              className="text-red-300 hover:underline"
-            >
-              Admin Login
-            </Link>
           </div>
         </form>
       </div>
 
-      <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 flex items-center justify-center">
-        <div className="bg-white/30 rounded-2xl p-10 text-center w-full">
-          <h1 className="text-2xl font-semibold text-black">
+      <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-10 flex flex-col justify-center text-center text-white">
+        <div className="bg-black/30 rounded-2xl p-10 text-center w-full">
+          <h1 className="text-2xl font-semibold ">
             WELCOME BACK TO
           </h1>
 
-          <h1 className="text-5xl font-extrabold text-black my-4">
+          <h1 className="text-5xl font-extrabold text-red-500 my-4">
             MovieHub
           </h1>
 
-          <p className="text-xl text-black">
+          <p className="text-xl">
             Please login to continue.
           </p>
 
           <div className="bg-black/20 rounded-xl p-4 mt-6">
-            <p className="text-lg text-black mb-2">
+            <p className="text-lg mb-2">
               Are you new here?
             </p>
 

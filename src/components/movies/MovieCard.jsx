@@ -16,14 +16,26 @@ export default function MovieCard({ movie }) {
       <div className="p-3">
         <h2 className="font-bold">{movie.title}</h2>
         <p className="text-sm text-gray-500">{movie.genre}</p>
+        {movie.price && (
+          <p className="text-sm text-gray-400 mt-1">Price: Ksh {movie.price}</p>
+        )}
 
-        <Link
-          to={`/movies/${movie.id}`}
-          className="inline-block mt-2 bg-red-600 text-white px-3 py-1 rounded"
-        >
-          View Details
-        </Link>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link
+            to={`/movies/${movie.id}`}
+            className="inline-block bg-red-600 text-white px-3 py-1 rounded"
+          >
+            View Details
+          </Link>
+          <Link
+            to={`/booking/${movie.id}`}
+            className="inline-block bg-gray-800 text-white px-3 py-1 rounded"
+          >
+            Book Now
+          </Link>
+        </div>
       </div>
     </div>
   );
 }
+
