@@ -4,40 +4,17 @@ import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 import { CalendarIcon, ClockIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
-interface Show {
-  id: number;
-  theater: string;
-  show_time: string;
-  available_seats: number;
-  total_seats: number;
-  price: number;
-  movie: {
-    id: number;
-    title: string;
-    duration: number;
-    genre: string;
-    rating: string;
-    language: string;
-  };
-}
-
-interface Seat {
-  number: number;
-  isAvailable: boolean;
-  isSelected: boolean;
-}
-
-const Booking: React.FC = () => {
-  const { showId } = useParams<{ showId: string }>();
+const Booking = () => {
+  const { showId } = useParams();
   const navigate = useNavigate();
   const { isAuthenticated, token } = useAuth();
-  const [show, setShow] = useState<Show | null>(null);
+  const [show, setShow] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
+  const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookingInProgress, setBookingInProgress] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
-  const API_URL = (import.meta as any).env.VITE_API_URL || 'http://localhost:8000';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 
 
@@ -61,9 +38,9 @@ const Booking: React.FC = () => {
     }
   };
 
-  const generateSeats = (): Seat[] => {
+  const generateSeats = () => {
     if (!show) return [];
-    const seats: Seat[] = [];
+    const seats = [];
     const bookedSeats = show.total_seats - show.available_seats;
     
     for (let i = 1; i <= show.total_seats; i++) {
@@ -76,7 +53,7 @@ const Booking: React.FC = () => {
     return seats;
   };
 
-  const toggleSeat = (seatNumber: number) => {
+  const toggleSeat = (seatNumber) => {
     if (!show) return;
     
     const seat = generateSeats().find(s => s.number === seatNumber);
@@ -102,7 +79,7 @@ const Booking: React.FC = () => {
       const response = await axios.post(
         `${API_URL}/api/bookings/`,
         {
-          show_id: parseInt(showId!),
+          show_id: parseInt(showId || '0'),
           seats_booked: selectedSeats.length
         },
         {
@@ -118,7 +95,7 @@ const Booking: React.FC = () => {
           show: show
         }
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error('Booking failed:', error);
       setError(error.response?.data?.detail || 'Booking failed. Please try again.');
     } finally {
@@ -154,11 +131,11 @@ const Booking: React.FC = () => {
         <div className="grid md:grid-cols-3 gap-4 text-gray-300">
           <div className="flex items-center space-x-2">
             <CalendarIcon className="h-5 w-5 text-red-500" />
-            <span>{new Date(show!.show_time).toLocaleDateString()}</span>
+            <span>{show?.show_time ? new Date(show.show_time).toLocaleDateString() : ''}</span>
           </div>
           <div className="flex items-center space-x-2">
             <ClockIcon className="h-5 w-5 text-red-500" />
-            <span>{new Date(show!.show_time).toLocaleTimeString()}</span>
+            <span>{show?.show_time ? new Date(show.show_time).toLocaleTimeString() : ''}</span>
           </div>
           <div className="flex items-center space-x-2">
             <MapPinIcon className="h-5 w-5 text-red-500" />

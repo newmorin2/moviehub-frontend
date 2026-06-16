@@ -8,7 +8,7 @@ import Loader from "../components/standard/Loader";
 import useMovies from "../hooks/useMovies";
 
 export default function Movies() {
-  const { movies, loading, error } = useMovies();
+  const { movies: initialMovies, loading, error } = useMovies();
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
 

@@ -76,4 +76,3 @@ export default function MovieDetails() {
   );
 }
 
-export default MovieDetails;

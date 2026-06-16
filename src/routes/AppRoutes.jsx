@@ -9,9 +9,6 @@ import MovieDetails from "../pages/MovieDetails";
 import AddMovie from "../pages/AddMovie";
 import AdminDashboard from "../pages/AdminDashboard";
 import AdminLogin from "../pages/AdminLogin";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import MyBookings from "../pages/MyBookings";
 
 import AdminLayout from "../components/admin/AdminLayout";
 

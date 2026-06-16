@@ -2,34 +2,10 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CheckCircleIcon, TicketIcon } from '@heroicons/react/24/outline';
 
-interface BookingConfirmationState {
-  booking: {
-    id: number;
-    seats_booked: number;
-    total_amount: number;
-    booking_time: string;
-    status: string;
-    show: {
-      id: number;
-      theater: string;
-      show_time: string;
-      price: number;
-      movie: {
-        title: string;
-        duration: number;
-        genre: string;
-        language: string;
-      };
-    };
-  };
-  selectedSeats: number[];
-  show: any;
-}
-
-const BookingConfirmation: React.FC = () => {
+const BookingConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const state = location.state as BookingConfirmationState;
+  const state = location.state;
 
   useEffect(() => {
     if (!state) {
