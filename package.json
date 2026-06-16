@@ -29,19 +29,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
-<<<<<<< HEAD
     "tailwindcss": "^4.3.0",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.59.2",
     "vite": "^8.0.12"
-=======
-    "vitest": "^4.1.8",
-    "tailwindcss": "^4.3.1",
-    "vite": "^8.0.12"
-  },
-  "allowScripts": {
-    "@firebase/util@1.15.1": true,
-    "protobufjs@7.6.4": true
->>>>>>> 5ca5cfeb0c9f576e9493b70936a7b1385371e050
   }
 }
