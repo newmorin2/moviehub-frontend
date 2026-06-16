@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import MovieForm from "../components/admin/MovieForm";
 
-const API_URL = "http://localhost:8000/movies";
+const API_URL = "http://localhost:8000";
 
 export default function EditMovie() {
   const { id } = useParams();
@@ -17,7 +17,7 @@ export default function EditMovie() {
     const fetchMovie = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${API_URL}/${id}`);
+        const response = await axios.get(`${API_URL}/movies/${id}`);
         setMovie(response.data);
         setError("");
       } catch (err) {
@@ -34,9 +34,7 @@ export default function EditMovie() {
   const handleUpdate = async (updatedMovie) => {
     try {
       setSaving(true);
-      await axios.put(`${API_URL}/${id}/`, updatedMovie, {
-        headers: { "Content-Type": "application/json" },
-      });
+      await axios.put(`${API_URL}/movies/${id}/`, updatedMovie);
       alert("Movie updated successfully");
       navigate("/admin");
     } catch (err) {
